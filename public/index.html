@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soporte Servitec</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #F2F2F2;
+        }
+
+        .carousel {
+            display: none;
+        }
+
+        .carousel.active {
+            display: block;
+        }
+
+        .carousel img {
+            height: 100vh;
+            width: 100vw;
+            object-fit: cover;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        main {
+            margin-top: 64px;
+        }
+
+        .nosotros-bg {
+            background-size: cover;
+            background-position: center;
+            color: white;
+            font-size: 10px;
+        }
+
+        .cinta{
+            background: #030A8C;
+        }
+        .cuadro{
+            background: #55A6D9;
+        }
+        .serv{
+            background: #13C9F2;
+        }
+        #servicios a{
+            color: #030A8C;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+        }
+
+        section {
+            scroll-margin-top: 64px;
+        }
+
+        #tecnologias h2 {
+            color: aliceblue;
+            font-size: 50px;
+            margin-top: 40px;
+        }
+
+        footer {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 2rem 0;
+        }
+
+        footer img {
+            height: 80px;
+            width: auto;
+        }
+
+        footer p {
+            margin: 0.25rem 0;
+        }
+
+        .hover-translate {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-translate:hover {
+            transform: translateY(-6px);
+        }
+
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Estilos del modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 0.5rem;
+            border: #ffffff;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .modal-img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 110%;
+            max-width: 200px;
+        }
+
+        .modal-title {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+        .modal-text {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body class="w-full">
+    <!-- Navbar -->
+    <header class="bg-white text-white">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="flex items-center">
+                <img src="./img/logo.png" alt="Logo" class="h-16 sm:h-20 lg:h-24 w-auto mr-2">
+            </div>
+
+            <!-- Menú para dispositivos grandes -->
+            <nav class="hidden lg:flex lg:items-center">
+                <a href="#inicio" class="text-blue-500 mr-4 hover:text-blue-900">Inicio</a>
+                <a href="#nosotros" class="text-blue-500 mr-4 hover:text-blue-900">Nosotros</a>
+                <a href="#servicios" class="text-blue-500 mr-4 hover:text-blue-900">Servicios</a>
+                <a href="#tecnologias" class="text-blue-500 mr-4 hover:text-blue-900">Tecnologías Utilizadas</a>
+                <a href="#cursos" class="text-blue-500 mr-4 hover:text-blue-900">Cursos</a>
+                <a href="./cotizaciones.html" class="text-blue-500 mr-4 hover:text-blue-900">Cotizaciones</a>
+                <a href="./contacto.html" class="text-blue-500 mr-4 hover:text-blue-900">Contacto</a>
+                <a href="./login.html" class="text-blue-500 hover:text-blue-900">Iniciar Sesión</a>
+            </nav>
+
+            <!-- Menú desplegable para teléfonos y tablets -->
+            <div class="lg:hidden">
+                <button id="mobile-menu-button" class="text-blue-600 focus:outline-none">
+                    <svg viewBox="0 0 20 20" fill="currentColor" class="menu w-6 h-6">
+                        <path fill-rule="evenodd"
+                            d="M3 4h14a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2zm0 5h14a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2zm0 5h14a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <div id="mobile-menu" class="hidden absolute top-0 right-0 bg-white mt-12 shadow-lg py-2 w-48">
+                    <a href="#inicio" class="block px-4 py-2 text-blue-600">Inicio</a>
+                    <a href="#nosotros" class="block px-4 py-2 text-blue-600">Nosotros</a>
+                    <a href="#servicios" class="block px-4 py-2 text-blue-600">Servicios</a>
+                    <a href="#tecnologias" class="block px-4 py-2 text-blue-600">Tecnologías Utilizadas</a>
+                    <a href="#cursos" class="block px-4 py-2 text-blue-600">Cursos</a>
+                    <a href="./cotizaciones.html" class="block px-4 py-2 text-blue-600">Cotizaciones</a>
+                    <a href="./contacto.html" class="block px-4 py-2 text-blue-600">Contacto</a>
+                    <a href="./login.html" class="block px-4 py-2 text-blue-600">Iniciar Sesión</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Carrusel -->
+    <div id="inicio" class="relative w-full">
+        <div class="carousel relative">
+            <img src="./img/img1.jpg" class="w-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center">
+                <h2 class="text-white text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-4">Soporte a Servicios
+                    Tecnológicos ServiTec</h2>
+                <div class="flex justify-center">
+                    <a href="./contacto.html" class="bg-blue-600 text-white px-4 py-2 rounded m-2 animate-pulse">Contáctanos</a>
+                    <a href="./cotizaciones.html" class="bg-blue-600 text-white px-4 py-2 rounded m-2 animate-pulse">Solicita un
+                        presupuesto</a>
+                </div>
+            </div>
+        </div>
+        <div class="carousel relative">
+            <img src="./img/img2.jpg" class="w-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <h2 class="text-white text-lg md:text-xl lg:text-2xl font-bold text-center">¿Necesitas crear un Sitio
+                    Web, Aplicaciones Móviles para tu negocio o empresa?</h2>
+            </div>
+        </div>
+        <div class="carousel relative">
+            <img src="./img/img3.jpg" class="w-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <h2 class="text-white text-lg md:text-xl lg:text-2xl font-bold text-center">Nuestros productos son
+                    escalables, robustos, y fáciles de usar. <br>¡Trabajamos con la mejor tecnología!</h2>
+            </div>
+        </div>
+        <!-- Botones para dispositivos grandes-->
+        <button
+            class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-4 py-2 rounded-full hidden md:block"
+            onclick="prevSlide()">❮</button>
+        <button
+            class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-4 py-2 rounded-full hidden md:block"
+            onclick="nextSlide()">❯</button>
+    </div>
+
+    <!-- Nosotros -->
+    <section id="nosotros" class="my-2 relative w-full">
+        <div class="nosotros-bg py-12 w-full relative h-full">
+            <div class="w-full text-white py-4 relative">
+                <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-white py-4 cinta">¿Quiénes
+                    somos?
+                </h3>
+            </div>
+            <div class="container mx-auto mt-8 px-4">
+                <p class="text-sm md:text-base lg:text-lg mb-2 text-black font-sans leading-relaxed mt-8 text-justify mx-16">
+                    ServiTec se forma en el año 2008 con un equipo de profesionales del área de Tecnologías de la
+                    Información, en un principio la empresa se dedicaba a brindar soluciones de internet en las
+                    comunidades por medio de enlaces inalámbricos y configuraciones de enrrutamiento se brindaban
+                    soluciones de comunicación a las familias.
+                    <br>
+                    ServiTec es una empresa que se ha desarrollado y actualizado a través del tiempo, ofreciendo
+                    servicios de soporte técnico, reparación, mantenimiento preventivo y correctivo a equipos de
+                    cómputo sin dejar a un lado la configuración de redes de computadoras, análisis de cableado
+                    estructurado de acuerdo a las normas de certificación vigentes e incorporando soluciones de
+                    software e instalación de programas a nuestros clientes.
+                    <br>
+                    Con el paso de los años ServiTec ha creado diferentes oportunidades y servicios a nuestros
+                    clientes, desde la posibilidad de promocionar sus negocios y empresas por medio de un sitio web,
+                    hasta garantizar el control y administración de los activos y pasivos de los negocios. No cabe
+                    la menor duda que ServiTec ha evolucionado creando aplicaciones multiplataformas para garantizar
+                    la correcta administración de las empresas brindando soluciones de software adaptadas a sus
+                    necesidades, realizando mejoras y actualizaciones en nuestros productos. Actualmente, contamos
+                    con más de 12 años de experiencia.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 mx-16">
+                    <div class="cuadro text-white p-6 rounded-lg hover-scale">
+                      <h4 class="text-lg font-bold mb-2 flex items-center">
+                        <img src="./img/mision.png" class="w-8 h-8 mr-2"> Misión
+                      </h4>
+                      <p class="text-sm leading-relaxed text-justify">Nuestra misión es ser una empresa líder en servicios tecnológicos, brindando soluciones en TIC´S que garanticen la calidad e innovación, preocupados por brindar a los clientes una atención excelente y sobre todo un trato completamente responsable.</p>
+                    </div>
+                    <div class="cuadro text-white p-6 rounded-lg hover-scale">
+                      <h4 class="text-lg font-bold mb-2 flex items-center">
+                        <img src="./img/vision.png" class="w-6 h-6 mr-2"> Visión
+                      </h4>
+                      <ul class="list-disc list-inside text-sm leading-relaxed text-justify">
+                        <li>Consolidarnos como la mejor empresa de tecnologías de la información</li>
+                        <li>Preocupados por el cumplimiento y la mejora de nuestros servicios</li>
+                      </ul>
+                    </div>
+                    <div class="cuadro text-white p-6 rounded-lg hover-scale">
+                      <h4 class="text-lg font-bold mb-2 flex items-center">
+                        <img src="./img/valores.png" class="w-8 h-8 mr-2"> Valores
+                      </h4>
+                      <ul class="list-disc list-inside text-sm leading-relaxed">
+                        <li>Calidad</li>
+                        <li>Innovación</li>
+                        <li>Integridad</li>
+                        <li>Responsabilidad</li>
+                        <li>Trabajo en equipo</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+            </div>
+        </div>
+    </section>
+
+    <!-- Publicidad -->
+    <section class="relative w-full h-auto lg:h-screen bg-cover bg-center"
+        style="background-image: url('./img/fondoPublicidad.jpg'); width: 100%; height: 100%;">
+        <div class="absolute inset-0 bg-black opacity-50 w-full"></div>
+        <div class="relative z-10 my-4 py-8 mx-12">
+            <h3 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-2 py-8 text-center text-white">
+                ¡El mejor servicio y calidad en un clic!</h3>
+            <div class="container mx-auto h-auto lg:h-full flex items-center justify-center">
+                <div class="grid grid-cols-1 xl:grid-cols-3 gap-4 lg:gap-8 py-12">
+                    <!-- 1 -->
+                    <div class="cinta bg-opacity-75 p-4 md:p-6 rounded-lg shadow-lg text-white mt-4 lg:mt-0">
+                        <div class="flex justify-center">
+                            <img src="./img/servicio-de-calidad.png" class="w-64 h-64 mb-16 rounded-lg hover-scale flex justify-center">
+                        </div>                    
+                        <h3 class="text-lg md:text-xl font-bold mb-4 text-center">Calidad</h3>
+                        <p class="text-base md:text-lg mb-4 text-justify">
+                            En ServiTec nos preocupamos por ofrecer los mejores productos y servicios, garantizando la funcionalidad, rendimiento y el mejor desempeño
+                        </p>
+                    </div>
+                    <!-- 2 -->
+                    <div class="cinta bg-opacity-75 p-4 md:p-6 rounded-lg shadow-lg text-white mt-4 lg:mt-0">
+                        <div class="flex justify-center">
+                            <img src="./img/mejor-precio.png" class="w-64 h-64 mb-16 rounded-lg hover-scale flex justify-center">
+                        </div>                    
+                        <h3 class="text-lg md:text-xl font-bold mb-4 text-center">El mejor precio</h3>
+                        <p class="text-base md:text-lg mb-4 text-justify">
+                            Garantizamos la calidad de nuestros productos a un precio justo y nos adaptamos a las necesidades del cliente, proponemos soluciones económicas que beneficien a ambas partes.
+                        </p>
+                    </div>
+                    <!--3 -->
+                    <div class="cinta bg-opacity-50 p-4 md:p-6 rounded-lg shadow-lg text-white mt-4 lg:mt-0">
+                        <div class="flex justify-center">
+                            <img src="./img/atencion-cliente.png" class="w-64 h-64 mb-16 rounded-lg hover-scale flex justify-center">
+                        </div>                    
+                        <h3 class=" text-lg :text-xl font-bold mb-4 text-center">Atención excelente</h3>
+                        <p class="text-base md:text-lg mb-4 text-justify">
+                            Trabajamos los 365 días de año y te brindamos ayuda con tus proyectos tecnológicos, además brindamos soporte técnico y la mejor atención.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="my-2 relative w-full">
+        <div class="w-full text-white py-10 relative h-full">
+            <div class="w-full text-white py-4 relative h-full">
+                <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-white cinta py-4">Soluciones
+                Informáticas</h3>
+            </div>
+        </div>
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-2">
+            <!-- Primer fila de servicios -->
+            <div class="cuadro p-4 rounded-lg hover-translate">
+                <img src="./img/serv11.jpg" alt="Servicio 1" class="w-full h-32 object-cover mb-4 rounded-lg">
+                <p class="text-lg">Sistema de control de acceso empresarial.</p>
+                <a href="#">Leer más</a>
+            </div>
+            <div class="cuadro p-4 rounded-lg hover-translate">
+                <img src="./img/serv2.png" alt="Servicio 2" class="w-full h-32 object-cover mb-4 rounded-lg">
+                <p class="text-lg">Sistemas de gestión empresarial.</p>
+                <a href="#">Leer más</a>
+            </div>
+            <div class="cuadro p-4 rounded-lg hover-translate">
+                <img src="./img/serv3.jpg" alt="Servicio 3"
+                    class="w-full h-32 object-cover mb-4 rounded-lg object-cover">
+                <p class="text-lg">Configuración de aulas virtuales.</p>
+                <a href="#">Leer más</a>
+            </div>
+            <div class="cuadro p-4 rounded-lg hover-translate">
+                <img src="./img/serv4.jpg" alt="Servicio 4" class="w-full h-32 object-cover mb-4 rounded-lg object-top">
+                <p class="text-lg">S.C.E. Sistemas de control escolar.</p>
+                <a href="#">Leer más</a>
+            </div>
+            <!-- Segunda fila de servicios -->
+            <div class="cuadro p-4 rounded-lg hover-translate">
+                <img src="./img/serv5.png" alt="Servicio 5" class="w-full h-32 object-cover mb-4 rounded-lg object-top">
+                <p class="text-lg">Impartición de cursos y talleres.</p>
+                <a href="#">Leer más</a>
+            </div>
+            <div class="cuadro p-4 rounded-lg hover-translate">
+                <img src="./img/serv1.jpg" alt="Servicio 6" class="w-full h-32 object-cover mb-4 rounded-lg">
+                <p class="text-lg">Desarrollo de aplicaciones web.</p>
+                <a href="#">Leer más</a>
+            </div>
+            <div class="cuadro p-4 rounded-lg hover-translate">
+                <img src="./img/serv7.png" alt="Servicio 7" class="w-full h-32 object-cover mb-4 rounded-lg">
+                <p class="text-lg">Desarrollo de aplicaciones móviles.</p>
+                <a href="#">Leer más</a>
+            </div>
+            <div class="cuadro p-4 rounded-lg hover-translate">
+                <img id="curso8" src="./img/serv8.jpg" alt="curso8" class="w-full h-32 object-cover mb-4 rounded-lg">
+                <p class="text-lg">S.C.M. Software de control médico.</p>
+                <a href="javascript:void(0);" onclick="openModal('curso8Modal')" class="text-blue-600">Leer más</a>
+            </div>
+        </div>
+    </section>
+    <br>
+
+    <!-- Tecnologías utilizadas -->
+    <section id="tecnologias" class="relative w-full h-auto lg:h-screen bg-cover bg-center"
+        style="background-image: url('./img/fondotec.jpg'); width: 100%; height: 100%;">
+        <div class="absolute inset-0 bg-black opacity-50 w-full"></div>
+        <div class="relative z-10 my-4 py-8">
+            <h3 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-2 py-8 text-center text-white">
+                Herramientas de desarrollo</h3>
+            <div class="container mx-auto h-auto lg:h-full flex items-center justify-center">
+                <div class="grid grid-cols-1 xl:grid-cols-3 gap-4 lg:gap-8 py-12">
+                    <!-- Backend -->
+                    <div class="cinta bg-opacity-75 p-4 md:p-6 rounded-lg shadow-lg text-white mt-4 lg:mt-0">
+                        <h3 class="text-lg md:text-xl font-bold mb-4 text-center">Backend</h3>
+                        <div class="flex flex-col items-center space-y-4">
+                            <a href="javascript:void(0);" onclick="openModal('javaModal')">
+                                <img id="java" src="./img/java.jpg" alt="Java"
+                                    class="h-20 md:h-24 lg:h-30 w-20 md:w-24 lg:w-32 rounded-lg hover-scale">
+                            </a>
+                            <a href="javascript:void(0);" onclick="openModal('csharpModal')">
+                                <img id="csharp" src="./img/c.png" alt="C#"
+                                    class="h-20 md:h-24 lg:h-30 w-20 md:w-24 lg:w-32 rounded-lg hover-scale">
+                            </a>
+                            <a href="javascript:void(0);" onclick="openModal('phpModal')">
+                                <img id="php" src="./img/php-logo.png" alt="PHP"
+                                    class="h-20 md:h-24 lg:h-30 w-20 md:w-24 lg:w-32 rounded-lg hover-scale">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Frontend -->
+                    <div class="cinta bg-opacity-75 p-4 md:p-6 rounded-lg shadow-lg text-white mt-4 lg:mt-0">
+                        <h3 class="text-lg md:text-xl font-bold mb-4 text-center">Frontend</h3>
+                        <div class="grid grid-cols-2 gap-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 md:gap-4">
+                            <a href="javascript:void(0);" onclick="openModal('htmlModal')">
+                                <img id="html" src="./img/htmll.jpg" alt="HTML"
+                                    class="h-20 md:h-20 lg:h-28 w-20 md:w-28 lg:w-30 mx-auto rounded-lg hover-scale">
+                            </a>
+                            <a href="javascript:void(0);" onclick="openModal('cssModal')">
+                                <img id="css" src="./img/csss.jpg" alt="CSS"
+                                    class="h-20 md:h-20 lg:h-28 w-20 md:w-28 lg:w-30 mx-auto rounded-lg hover-scale">
+                            </a>
+                            <a href="javascript:void(0);" onclick="openModal('javascriptModal')">
+                                <img id="javascript" src="./img/JavaScript-logo.png" alt="JavaScript"
+                                    class="h-20 md:h-20 lg:h-28 w-20 md:w-28 lg:w-30 mx-auto rounded-lg hover-scale">
+                            </a>
+                            <a href="javascript:void(0);" onclick="openModal('angularModal')">
+                                <img id="angular" src="./img/ang.jpg" alt="Angular"
+                                    class="h-20 md:h-20 lg:h-28 w-20 md:w-28 lg:w-30 mx-auto rounded-lg hover-scale">
+                            </a>
+                            <a href="javascript:void(0);" onclick="openModal('bootstrapModal')">
+                                <img id="bootstrap" src="./img/bootstrap.png" alt="Bootstrap"
+                                    class="h-20 md:h-24 lg:h-28 w-20 md:w-24 lg:w-32 mx-auto rounded-lg hover-scale">
+                            </a>
+                            <a href="javascript:void(0);" onclick="openModal('typescriptModal')">
+                                <img id="typescript" src="./img/typescript.svg" alt="Typescript"
+                                    class="h-20 md:h-24 lg:h-28 w-20 md:w-24 lg:w-32 mx-auto rounded-lg hover-scale">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Framworks -->
+                    <div class="cinta bg-opacity-75 p-4 md:p-6 rounded-lg shadow-lg text-white mt-4 lg:mt-0">
+                        <h3 class="text-lg md:text-xl font-bold mb-4 text-center">Frameworks</h3>
+                        <div class="flex flex-col items-center space-y-4">
+                            <a href="javascript:void(0);" onclick="openModal('springModal')">
+                                <img id="spring" src="./img/spring.png" alt="Spring"
+                                    class="h-20 md:h-24 lg:h-32 w-26 md:w-30 lg:w-34 rounded-lg hover-scale">
+                            </a>
+                            <a href="javascript:void(0);" onclick="openModal('laravelModal')">
+                                <img id="laravel" src="./img/laravel.webp" alt="Laravel"
+                                    class="h-12 md:h-16 lg:h-20 w-26 md:w-26 lg:w-30 rounded-lg hover-scale">
+                            </a>
+                            <a href="javascript:void(0);" onclick="openModal('nodeModal')">
+                                <img id="node" src="./img/node.png" alt="NodeJs"
+                                    class="h-20 md:h-24 lg:h-28 w-26 md:w-28 lg:w-36 rounded-lg hover-scale">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Cursos -->
+    <section id="cursos" class="my-24 w-full">
+        <div class="nosotros-bg py-10">
+            <div class="relative z-10 w-full h-full py-6">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-white cinta py-4">
+                    Cursos de capacitación</h2>
+                <div class="container mx-auto px-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 py-8">
+                        <!-- Cuadro 1 -->
+                        <div class="cuadro p-4 rounded-lg hover-scale transition-colors">
+                            <img src="./img/iottt.jpg" alt="Curso 1" class="w-full h-32 object-cover mb-4 rounded-lg">
+                            <h4 class="text-lg md:text-xl font-bold mb-2">Internet de las cosas IoT.</h4>
+                            <p class="text-base md:text-lg mb-4">Crear aplicaciones con dispositivos electrónicos y
+                                programación C es una de las características y objetivos de este curso de IoT.
+                                <br>
+                                En este curso se cubren los fundamentos de electrónica, Arduino, ESP32, IoT,
+                                programación C y la aplicación de todo lo anterior para crear prototipos de
+                                circuitos orientados a soluciones prácticas.
+                            </p>
+                            <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded">Más información</a>
+                        </div>
+                        <!-- Cuadro 2 -->
+                        <div class="cuadro p-4 rounded-lg hover-scale">
+                            <img src="./img/diseñoweb.webp" alt="Curso 2"
+                                class="w-full h-32 object-cover mb-4 rounded-lg">
+                            <h4 class="text-lg md:text-xl font-bold mb-2">Diseño de sitios web.</h4>
+                            <p class="text-base md:text-lg mb-4">Inicia tu camino hacia los mejores trabajos de la
+                                actualidad y aprende los fundamentos del desarrollo web, ideales para construir
+                                sitios estáticos desde cero, utilizando lenguajes de la web como HTML, CSS y JS.
+                                <br>
+                                Aprende a Diseñar Páginas Web Responsive Design, atractivas, de forma profesional y
+                                sin dificultad utilizando Figma.
+                            </p>
+                            <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded">Más información</a>
+                        </div>
+                        <!-- Cuadro 3 -->
+                        <div class="cuadro p-4 rounded-lg hover-scale">
+                            <img src="./img/3dd.jpg" alt="Curso 3" class="w-full h-32 object-cover mb-4 rounded-lg">
+                            <h4 class="text-lg md:text-xl font-bold mb-2">Animación y Modelado 3D.</h4>
+                            <p class="text-base md:text-lg mb-4">La animación 3D y el modelado tridimensional están
+                                directamente relacionados, encontrando como principal diferencia entre ambos el
+                                movimiento.La animación es el proceso de otorgar movimiento a modelos 3D mediante la
+                                creación de secuencias de imágenes fijas.
+                                Aprende a dar vida a tus ideas, lleva tu arte al siguiente nivel.</p>
+                                <br><br>
+                            <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded">Más información</a>
+                        </div>
+                        <!-- Cuadro 4 -->
+                        <div class="cuadro p-4 rounded-lg hover-scale">
+                            <img src="./img/power.png" alt="Curso 4" class="w-full h-32 object-cover mb-4 rounded-lg">
+                            <h4 class="text-lg md:text-xl font-bold mb-2">Power BI</h4>
+                            <p class="text-base md:text-lg mb-4">Power BI te ayudara a automatizar tus reportes,
+                                analizar tus datos, tomar decisiones de forma fácil y oportuna, llevando tus
+                                reportes al siguiente nivel, evitando recabar la información de forma manual y
+                                retrabajando el mismo reporte cada semana.
+                                <br>
+                                El entrenamiento te llevara de los temas fundamentales hasta los avanzados del
+                                modelo de datos.
+                            </p>
+                            <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded">Más información</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto p-4">
+        <!-- Script para el carrusel -->
+        <script>
+            let currentIndex = 0;
+            const slides = document.querySelectorAll('.carousel');
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slides.length;
+                showSlide(currentIndex);
+            }
+
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                showSlide(currentIndex);
+            }
+
+            setInterval(nextSlide, 5000);
+        </script>
+
+        <!-- JavaScript para el menú desplegable en dispositivos móviles-->
+        <script>
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        </script>
+
+        <!-- Java Modal -->
+        <div id="javaModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('javaModal')">&times;</span>
+                <img class="modal-img" src="./img/java.jpg" alt="Java">
+                <h2 class="modal-title">Oracle Java</h2>
+                <p class="modal-text">Es la plataforma número uno de lenguaje de programación y desarrollo. Reduce
+                    costos, acorta los plazos de desarrollo, impulsa la innovación y mejora los servicios de las
+                    aplicaciones. Java sigue siendo la plataforma de desarrollo preferida por empresas y
+                    desarrolladores, y cuenta con millones de desarrolladores que ejecutan más de 60 mil millones de
+                    máquinas virtuales Java en todo el mundo.</p>
+            </div>
+        </div>
+
+        <!-- C# Modal -->
+        <div id="csharpModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('csharpModal')">&times;</span>
+                <img class="modal-img" src="./descriptions/image/logoC.png" alt="C#">
+                <h2 class="modal-title">C# o C Sharp</h2>
+                <p class="modal-text">Es un lenguaje de programación desarrollado por Microsoft, orientado a objetos,
+                    que ha sido diseñado para compilar diversas aplicaciones que se ejecutan en .NET Framework. Se trata
+                    de un lenguaje simple, eficaz y con seguridad de tipos . Las numerosas innovaciones de C# permiten
+                    desarrollar aplicaciones rápidamente y mantener la expresividad y elegancia de los lenguajes de
+                    estilo de C.</p>
+            </div>
+        </div>
+
+        <!-- PHP Modal -->
+        <div id="phpModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('phpModal')">&times;</span>
+                <img class="modal-img" src="./descriptions/image/php-logo.png" alt="PHP">
+                <h2 class="modal-title">Hypertext Preprocessor</h2>
+                <p class="modal-text">Es un lenguaje de programación de código abierto muy utilizado especialmente en el
+                    desarrollo de aplicaciones y web, este lenguaje de código puede ser incrustado en HTML5 puesto que
+                    es un código muy variable favorece el enlace entre la interfaz de usuario y los servidores.</p>
+            </div>
+        </div>
+
+        <!-- HTML Modal-->
+        <div id="htmlModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('htmlModal')">&times;</span>
+                <img class="modal-img" src="./descriptions/image/html.png" alt="HTML">
+                <h2 class="modal-title">HyperText Markup Language</h2>
+                <p class="modal-text">Lenguaje de marcado de hipertexto o HyperText Markup Language por sus siglas en
+                    inglés, es un lenguaje descriptivo que especifica la estructura de las páginas web. Sfe utiliza para
+                    estructurar y desplegar una página web y sus contenidos. Por ejemplo, sus contenidos podrían ser
+                    párrafos, una lista con viñetas, o imágenes y tablas de datos.</p>
+            </div>
+        </div>
+
+        <!-- CSS Modal-->
+        <div id="cssModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('cssModal')">&times;</span>
+                <img class="modal-img" src="./descriptions/image/css.svg" alt="CSS">
+                <h2 class="modal-title">Cascading Style Sheets</h2>
+                <p class="modal-text">Es un lenguaje de programación que sirve para determinar el diseño de los
+                    documentos electrónicos. Con la ayuda de unas sencillas instrucciones -presentadas en forma de
+                    código fuente claro-, los elementos del sitio web, como el diseño, el color y la tipografía, pueden
+                    adaptarse como se desee.</p>
+            </div>
+        </div>
+
+        <!-- Javascript Modal-->
+        <div id="javascriptModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('javascriptModal')">&times;</span>
+                <img class="modal-img" src="./img/JavaScript-logo.png" alt="JavaScript">
+                <h2 class="modal-title">JavaScript</h2>
+                <p class="modal-text">Es un lenguaje de programación que los desarrolladores utilizan para hacer páginas
+                    web interactivas. Desde actualizar fuentes de redes sociales a mostrar animaciones y mapas
+                    interactivos, las funciones de JavaScript pueden mejorar la experiencia del usuario de un sitio web.
+                </p>
+            </div>
+        </div>
+
+        <!-- Angular Modal-->
+        <div id="angularModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('angularModal')">&times;</span>
+                <img class="modal-img" src="./descriptions/image/angular.png" alt="JavaScript">
+                <h2 class="modal-title">Angular</h2>
+                <p class="modal-text">Es una plataforma y un framework para crear aplicaciones de una sola página en el
+                    lado del cliente usando HTML y TypeScript. Angular está escrito en TypeScript. Implementa la
+                    funcionalidad básica y opcional como un conjunto de bibliotecas TypeScript que importas en tus
+                    aplicaciones.</p>
+            </div>
+        </div>
+
+        <!-- Bootstrap Modal-->
+        <div id="bootstrapModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('bootstrapModal')">&times;</span>
+                <img class="modal-img" src="./img/bootstrap.png" alt="Bootstrap">
+                <h2 class="modal-title">Bootstrap</h2>
+                <p class="modal-text">Es un framework front-end utilizado para desarrollar aplicaciones web y sitios
+                    mobile first, en otras palabras, con un layout que se adapta a la pantalla del dispositivo utilizado
+                    por el usuario. <br>Está constituido por una serie de archivos CSS y JavaScript responsables de
+                    asignar características específicas a los elementos de la página.</p>
+            </div>
+        </div>
+
+        <!-- TypeScripts Modal-->
+        <div id="typescriptModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('typescriptModal')">&times;</span>
+                <img class="modal-img" src="./img/typescript.svg" alt="TypeScript">
+                <h2 class="modal-title">TypeScript</h2>
+                <p class="modal-text">Lenguaje de programación libre y de código abierto desarrollado y mantenido por
+                    Microsoft. Es un superconjunto de JavaScript, que esencialmente añade tipos estáticos y objetos
+                    basados en clases.<br>Se basa en JavaScript para darnos herramientas de desarrollo en cualquier
+                    escala de proyectos.</p>
+            </div>
+        </div>
+
+        <!-- Spring Modal-->
+        <div id="springModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('springModal')">&times;</span>
+                <img class="modal-img" src="./img/spring.png" alt="Spring">
+                <h2 class="modal-title">Spring</h2>
+                <p class="modal-text">Framework de código abierto para la creación de aplicaciones empresariales Java,
+                    con soporte para Groovy y Kotlin. Tiene una estructura modular y una gran flexibilidad para
+                    implementar diferentes tipos de arquitectura según las necesidades de la aplicación.</p>
+            </div>
+        </div>
+
+        <!-- Lavarvel Modal-->
+        <div id="laravelModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('laravelModal')">&times;</span>
+                <img class="modal-img" src="./img/laravel.webp" alt="Laravel">
+                <h2 class="modal-title">Laravel</h2>
+                <p class="modal-text">Es un framework PHP gratis y de código abierto que brinda un conjunto de
+                    herramientas y recursos para crear aplicaciones modernas. Posee un ecosistema integral que combina
+                    funciones integradas y una variedad de paquetes y extensiones compatibles. </p>
+            </div>
+        </div>
+
+        <!-- Node Modal-->
+        <div id="nodeModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('nodeModal')">&times;</span>
+                <img class="modal-img" src="./img/node.png" alt="Laravel">
+                <h2 class="modal-title">Node JS.</h2>
+                <p class="modal-text">Entorno de ejecución usado para ejecutar código JavaScript en los servidores.
+                    Permite ejecutar JavaScript sin necesidad de un navegador web. Node.js es compatible con sistemas
+                    operativos como Windows, macOS y Linux. Es una plataforma de código abierto, por lo que todos los
+                    usuarios pueden acceder al código fuente de forma gratuita.</p>
+            </div>
+        </div>
+
+        <!-- Curso 8 Modal-->
+        <div id="curso8Modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('curso8Modal')">&times;</span>
+                <h2 class="modal-title">S.C.M. Software de control médico.</h2>
+                <p class="modal-text">Entorno de ejecución usado para ejecutar código JavaScript en los servidores.
+                    Permite ejecutar JavaScript sin necesidad de un navegador web. Node.js es compatible con sistemas
+                    operativos como Windows, macOS y Linux. Es una plataforma de código abierto, por lo que todos los
+                    usuarios pueden acceder al código fuente de forma gratuita.</p>
+            </div>
+        </div>
+
+        <!-- Script para los modales-->
+        <script>
+            function openModal(modalId) {
+                document.getElementById(modalId).style.display = "block";
+            }
+
+            function closeModal(modalId) {
+                document.getElementById(modalId).style.display = "none";
+            }
+
+            window.onclick = function (event) {
+                var modals = document.getElementsByClassName("modal");
+                for (var i = 0; i < modals.length; i++) {
+                    if (event.target == modals[i]) {
+                        modals[i].style.display = "none";
+                    }
+                }
+            }
+        </script>
+
+    </main>
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center items-center">
+                <div class="w-full md:w-1/2 lg:w-1/4 text-center lg:text-left mb-4 lg:mb-0">
+                    <img src="./img/logo.png" alt="Logo" class="h-16 sm:h-20 md:h-24 w-auto mx-auto lg:mx-0">
+                </div>
+                <div class="w-full lg:w-3/4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="mb-4 lg:mb-0">
+                        <div class="flex items-center justify-center lg:justify-start mb-2">
+                            <img src="./img/ubicacion.png" alt="Location Icon" class="h-6 w-6 mr-2">
+                            <h3 class="text-sm sm:text-base md:text-lg font-semibold">Ubicación</h3>
+                        </div>
+                        <p class="text-xs sm:text-sm md:text-base text-center lg:text-left">País: México</p>
+                        <p class="text-xs sm:text-sm md:text-base text-center lg:text-left">Estado: Puebla</p>
+                        <p class="text-xs sm:text-sm md:text-base text-center lg:text-left">Ciudad: Xicotepec</p>
+                        <p class="text-xs sm:text-sm md:text-base text-center lg:text-left">Dirección: Calle 3 de Mayo
+                            No 104 Col. Centro de Xicotepec</p>
+                    </div>
+                    <div class="mb-4 lg:mb-0">
+                        <div class="flex items-center justify-center lg:justify-start mb-2">
+                            <img src="./img/tel.png" alt="Phone Icon" class="h-6 w-6 mr-2">
+                            <h3 class="text-sm sm:text-base md:text-lg font-semibold">Números de contacto</h3>
+                        </div>
+                        <p class="text-xs sm:text-sm md:text-base text-center lg:text-left">Whatsapp: 7641112200,
+                            7641114713</p>
+                        <p class="text-xs sm:text-sm md:text-base text-center lg:text-left">Teléfono Fijo: 7641114713
+                        </p>
+                    </div>
+                    <div class="mb-4 lg:mb-0 md:col-span-2">
+                        <div class="flex items-center justify-center lg:justify-start mb-2">
+                            <img src="./img/grupo.png" alt="About Icon" class="h-6 w-6 mr-2">
+                            <h3 class="text-sm sm:text-base md:text-lg font-semibold">Acerca de Nosotros</h3>
+                        </div>
+                        <p class="text-xs sm:text-sm md:text-base text-center lg:text-left">Somos una empresa dedicada
+                            al desarrollo de software y soluciones tecnológicas para empresas.</p>
+                    </div>
+                </div>
+            </div>
+            <p class="text-xs sm:text-sm text-center mt-6">&copy; 2023 ServiTec. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

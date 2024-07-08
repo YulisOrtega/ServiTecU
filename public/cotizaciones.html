@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotización - Soporte Servitec</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .cinta{
+            background: #030A8C;
+        }
+        .fondo{
+            background-color: #55A6D9;
+        }
+    </style>
+</head>
+<body>
+    <header class="cinta text-white p-4">
+        <h1 class="text-4xl md:text-5xl lg:text-5xl font-bold text-center text-white">Solicita una cotización</h1>
+    </header>
+    <main class="p-4">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div class="hidden md:block">
+                <img src="./img/cotizaciones.png" alt="Imagen de cotización" class="w-full rounded-lg">
+            </div>
+            <div>
+                <form action="./guardar_cotizacion.php" method="POST" class="bg-white p-6 rounded shadow-md">
+                    <div class="mb-4">
+                        <label for="nombre" class="block text-sm font-bold mb-2">Nombre</label>
+                        <input type="text" name="nombre" id="nombre" class="w-full p-2 border rounded">
+                    </div>
+                    <div class="mb-4">
+                        <label for="apellidos" class="block text-sm font-bold mb-2">Apellidos</label>
+                        <input type="text" name="apellidos" id="apellidos" class="w-full p-2 border rounded">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-bold mb-2">Email</label>
+                        <input type="email" name="email" id="email" class="w-full p-2 border rounded">
+                    </div>
+                    <div class="mb-4">
+                        <label for="telefono" class="block text-sm font-bold mb-2">Teléfono</label>
+                        <input type="text" name="telefono" id="telefono" class="w-full p-2 border rounded">
+                    </div>
+                    <div class="mb-4">
+                        <label for="proyecto" class="block text-sm font-bold mb-2">Proyecto</label>
+                        <select name="proyecto" id="proyecto" class="w-full p-2 border rounded">
+                            <option value="diseño_web">Diseño Web</option>
+                            <option value="diseño_software">Diseño de Software Multiplataforma</option>
+                            <option value="diseño_app">Diseño de App Móvil</option>
+                            <option value="compra_equipo">Compra de Equipo de Cómputo</option>
+                            <option value="servicio_tecnico">Servicio Técnico</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="mensaje" class="block text-sm font-bold mb-2">Mensaje</label>
+                        <textarea name="mensaje" id="mensaje" class="w-full p-2 border rounded"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="tipo_moneda" class="block text-sm font-bold mb-2">Tipo de Moneda</label>
+                        <select name="tipo_moneda" id="tipo_moneda" class="w-full p-2 border rounded">
+                            <option value="peso_mexicano">Peso Mexicano</option>
+                            <option value="dolar">Dólar</option>
+                            <option value="euro">Euro</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Enviar</button>
+                </form>
+                <div class="mt-4">
+                    <a href="/" class="bg-gray-600 text-white px-4 py-2 rounded">Regresar al inicio</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+

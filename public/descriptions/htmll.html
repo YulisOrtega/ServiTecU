@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('./image/fondoo.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        .content {
+            background-color: rgba(207, 207, 207, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 100%;
+            height: auto;
+        }
+        .description {
+            margin-top: 20px;
+            font-size: 1.5em;
+            text-align: justify;
+            text-justify: inter-word;
+            font-family: 'Times New Roman', Times, serif;
+            color: rgb(0, 0, 0);
+        }
+
+        img {
+            width: 40%;
+        }
+        .hover-scale:hover {
+        transform: scale(1.09); /* Cambia el valor de escala según tu preferencia */
+        }  
+        .description h2 {
+            font-size: 2.2em;
+            color: #000000;
+            text-shadow: 0 0 10px rgba(46, 45, 45, 0.8), 
+                         0 0 20px rgba(141, 141, 141, 0.6), 
+                         0 0 30px rgba(121, 118, 118, 0.4);
+            animation: glow 1.5s ease-in-out infinite alternate;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <img src="./image/html.png" alt="Logo" class="logob hover-scale" >
+        <div class="description">
+            <h2>HyperText Markup Language</h2>
+            Lenguaje de marcado de hipertexto o HyperText Markup Language por sus siglas en inglés, es un lenguaje descriptivo que especifica la estructura de las páginas web. Sfe utiliza para estructurar y desplegar una página web y sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una lista con viñetas, o imágenes y tablas de datos.
+        </div>
+    </div>
+</body>
+</html>
